@@ -6,8 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var sequelize = require('./models').sequelize; // 시퀄라이즈를 통해 익스프레스 앱과 MySQL 연결
 
 var app = express();
+sequelize.sync(); // 시퀄라이즈를 통해 익스프레스 앱과 MySQL 연결
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
