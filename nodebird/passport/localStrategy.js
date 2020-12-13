@@ -10,7 +10,7 @@ module.exports = (passport) => {
     }, async (email, password, done) => { // 실제 전략 수행 함수
         // 세 번째 done 함수는 passport.authenticate의 콜백 함수
         try{
-            const exUser = await User.find({ where: { email }}); // 데이터베이스에서 일치하는 이메일이 있는지 찾음
+            const exUser = await User.findOne({ where: { email }}); // 데이터베이스에서 일치하는 이메일이 있는지 찾음
             if(exUser){ // 있으면 compare 함수로 비밀번호 비교
                 const result = await bcrypt.compare(password, exUser.password);
                 if(result){ // 일치하면 done 함수의 두 번째 인자로 사용자 정보 넣어 보냄

@@ -9,6 +9,8 @@ require('dotenv').config();
 
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
+const userRouter = require('./routes/user');
 const passportConfig = require('./passport');
 const { sequelize } = require('./models');
 
@@ -22,6 +24,10 @@ app.set('port', process.env.PORT || 8001); // 앱 8001번 포트에 연결
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+// express.static 미들웨어로 uploads 폴더와 연결
+// express.static 여러 번 쓸 수 있음
+// uploads 폴더 내 사진들이 /img 주소로 제공됨
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // 비밀키를 하드코딩한 경우 소스 코드 유출 시 키도 같이 유출되므로 별도로 관리해야 함
@@ -46,6 +52,8 @@ app.use(passport.session()); // req.session 객체에 passport 정보 저장
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
+app.use('/user', userRouter);
 
 // 404 미들웨어
 app.use((req, res, next)=>{

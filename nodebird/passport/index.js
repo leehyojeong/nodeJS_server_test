@@ -16,12 +16,30 @@ module.exports = (passport) => {
     // deserializeUser는 매 요청 시 실행
     // passport.session() 미들웨어가 deserializeUser 메서드 호출
 
-    // serializeUser에서 세션에 저장했던 아이디를 받아 데이터베이스에서 사용자 정보 조회
+    // // serializeUser에서 세션에 저장했던 아이디를 받아 데이터베이스에서 사용자 정보 조회
+    // passport.deserializeUser((id, done) => {
+    //     User.findOne({ where: {id}})
+    //         .then(user => done(null, user)) // 조회한 정보를 req.user에 저장
+    //         .catch(err => done(err));
+    //     // req.user를 통해 로그인한 사용자 정보를 가져올 수 있음
+    // });
+
+    // routes/user.js에서 팔로잉 관계가 생겼기 때문에 req.user에도 팔로워와 팔로잉 목록 저장
     passport.deserializeUser((id, done) => {
-        User.findOne({ where: {id}})
-            .then(user => done(null, user)) // 조회한 정보를 req.user에 저장
+        User.findOne({
+            where: {id},
+            include: [{
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followers',
+            }, {
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followings',
+            }],
+        })
+            .then(user => done(null, user))
             .catch(err => done(err));
-        // req.user를 통해 로그인한 사용자 정보를 가져올 수 있음
     });
 
     // serializeUser는 사용자 정보 객체를 세션에 아이디로 저장

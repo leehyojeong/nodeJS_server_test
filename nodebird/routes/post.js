@@ -66,4 +66,31 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     }
 });
 
+// 해시태그로 조회하는 /post/hashtag 라우터
+router.get('/hashtag', async (req, res, next) => {
+    const query = req.query.hashtag; // 쿼리스트링으로 해시태그 이름을 받고 
+    if(!query){ // 해시태그가 빈 문자열인 경우 메인페이지로 돌려보냄
+        return res.rendirect('/');
+    }
+
+    try{
+        // 데이터베이스에서 해당 해시태그가 존재하는지 검색
+        const hashtag = await Hashtag.findOne({ where: { title: query }});
+        let posts = [];
+        if(hashtag){
+            // 시퀄라이즈에서 제공하는 getPosts 메서드로 모든 게시글 가져옴
+            // 가져올 때 작성자 정보 JOIN
+            posts = await hashtag.getPosts({ include: [{ model: User }]});
+        }
+        return res.render('main', {
+            title: `${query} | NodeBird`,
+            user: req.user,
+            twits: posts, // 전체 게시글 대신 조회된 게시글만 twits에 넣어 렌더링
+        });
+    }catch(error){
+        console.error(error);
+        return next(error);
+    }
+});
+
 module.exports = router;

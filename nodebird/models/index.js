@@ -24,7 +24,7 @@ db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
 // 사용자 한 명이 팔로워를 여러 명 가질 수도 있고,
 db.User.belongsToMany(db.User, {
   foreignKey: 'followingId',
-  as: 'Follwers',
+  as: 'Followers',
   through: 'Follow',
 });
 // 여러 명을 팔로잉할 수도 있음

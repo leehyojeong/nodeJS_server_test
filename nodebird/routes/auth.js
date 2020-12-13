@@ -13,7 +13,7 @@ router.post('/join', isNotLoggedIn, async(req, res, next) => {
     
     try{
         // 기존에 같은 이메일로 가입한 사용자가 있는지 조회
-        const exUser = await User.find({ where: { email }});
+        const exUser = await User.findOne({ where: { email }});
         if(exUser){ 
             req.flash('joinError', '이미 가입된 이메일입니다.'); // 있으면 메시지를 설정하고
             return res.redirect('/join'); // 회원가입 페이지로 돌려보냄
@@ -53,7 +53,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         
         // 두 번째 인자값 user가 있다면 로그인 전략 성공 후 req.login 메서드 호출
         // Passport는 req 객체에 login, logout 메서드 추가
-        return req.login(uesr, (loginError)=>{ // req.login은 serializeUser 호출
+        return req.login(user, (loginError)=>{ // req.login은 serializeUser 호출
             // 첫 번째 인자 user가 serializeUser로 넘어감
             if(loginError){
                 console.error(loginError);
