@@ -6,9 +6,37 @@ block content
             h2 팔로잉 목록
             if user.Followings
                 for following in user.Followings
-                    div= following.nick
+                    div#unfollow-div
+                        div= following.nick
+                        input.follow-id(type='hidden' value=following.id)
+                        button.twit-unfollow 팔로우 취소
         .followers.half
             h2 팔로워 목록
             if user.Followers
                 for follower in user.Followers
                     div= follower.nick
+    script.
+        document.querySelectorAll('.twit-unfollow').forEach(function(tag){
+            tag.addEventListener('click', function(){
+                var isLoggedIn = document.querySelector('#my-id');
+                if(isLoggedIn){
+                    var userId = tag.parentNode.querySelector('.follow-id').value;
+                    var myId = isLoggedIn.value;
+                    // console.log(userId);
+                    if(userId!=myId){
+                        if(confirm('팔로우를 끊으시겠습니까?')){
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = function(){
+                                if(xhr.status===200){
+                                    location.reload();
+                                }else{
+                                    console.error(xhr.responseText);
+                                }
+                            };
+                            xhr.open('POST', '/user/'+userId+'/unfollow');
+                            xhr.send();
+                        }
+                    }
+                }
+            });
+        });
