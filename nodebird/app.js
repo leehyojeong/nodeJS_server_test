@@ -4,11 +4,17 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
 require('dotenv').config();
 
 const pageRouter = require('./routes/page');
+const authRouter = require('./routes/auth');
+const passportConfig = require('./passport');
+const { sequelize } = require('./models');
 
 const app = express();
+sequelize.sync();
+passportConfig(passport);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -24,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser('nodebirdsecret')); 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     // secret: 'nodebirdsecret',
     secret: process.env.COOKIE_SECRET,
@@ -34,8 +40,12 @@ app.use(session({
     },
 }));
 app.use(flash());
+app.use(passport.initialize()); // req객체에 passport 설정을 심음
+app.use(passport.session()); // req.session 객체에 passport 정보 저장
+// req.session 객체는 express-session에서 생성하기 때문에 express-session 미들웨어보다 뒤에 연결
 
 app.use('/', pageRouter);
+app.use('/auth', authRouter);
 
 // 404 미들웨어
 app.use((req, res, next)=>{
