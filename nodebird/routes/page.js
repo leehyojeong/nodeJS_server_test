@@ -11,7 +11,7 @@ const router = express.Router();
 
 // 접근 권한 제어(로그인) 추가 후 코드(1)
 // 프로필은 로그인해야 볼 수 있음
-router.get('/profie', isLoggedIn, (req, res) => {
+router.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile', { title: '내 정보 - NodeBird', user: req.user });
 });
 
