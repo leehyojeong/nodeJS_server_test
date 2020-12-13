@@ -93,4 +93,15 @@ router.get('/hashtag', async (req, res, next) => {
     }
 });
 
+// [추가 기능(4)] 게시글 삭제하기
+router.delete('/:postId', isLoggedIn, async (req, res, next) => {
+    try{
+        const post = await Post.destroy({ where: { id: req.params.postId }});
+        res.send('success');
+    }catch(err){
+        console.error(err);
+        return next(err);
+    }
+});
+
 module.exports = router;
