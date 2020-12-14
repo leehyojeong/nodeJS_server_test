@@ -12,6 +12,7 @@ db.Sequelize = Sequelize;
 db.User = require('./user')(sequelize, Sequelize);
 db.Post = require('./post')(sequelize, Sequelize);
 db.Hashtag = require('./hashtag')(sequelize, Sequelize);
+db.Domain = require('./domain')(sequelize, Sequelize);
 
 // User 모델과 Post 모델은 1:N 관계
 db.User.hasMany(db.Post);
@@ -33,6 +34,11 @@ db.User.belongsToMany(db.User, {
   as: 'Followings',
   through: 'Follow',
 });
+
+// 사용자 모델과 도메인 모델은 일대다 관계
+// 사용자 한 명이 여러 도메인 소유 가능
+db.User.hasMany(db.Domain);
+db.Domain.belongsTo(db.User);
 
 // as에 등록한 이름을 바탕으로 시퀄라이즈는
 // getFollowings, getFollowers, getFollowing, getFollower 등의 메서드 자동 추가
