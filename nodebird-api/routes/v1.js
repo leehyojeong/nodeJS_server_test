@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/token', async (req, res) => {
     const { clientSecret } = req.body;
     try {
-        const domain = await Domain.find({
+        const domain = await Domain.findOne({
             where: { clientSecret },
             include: {
                 model: User,
@@ -58,4 +58,32 @@ router.get('/test', verifyToken, (req, res) => { // 토큰을 검증하는 미�
     res.json(req.decoded); // 검증 성공 시 토큰 내용물로 응답
 });
 
+// 내가 올린 포스트 검색 결과를 가져오는 라우터
+router.get('/posts/my', verifyToken, (req, res)=>{
+    Post.findAll({ where: { userId: req.decoded.id }})
+        .then((posts)=>{
+            console.log(posts);
+            res.json({
+                code: 200, 
+                payload: posts,
+            });
+        })
+        .catch((error)=>{
+            console.error(error);
+            return res.status(500).json({
+                code: 500, 
+                message: '서버 에러',
+            });
+        });
+});
+
+// 내가 올린 해시태그 검색 결과를 가져오는 라우터
+router.get('/posts/hashtag/:title', verifyToken, async (req, res)=>{
+    try{
+        const hashtag = await Hashtag.findOne({ where: { title: req.params.title }});
+        
+    }catch(error){
+
+    }
+});
 module.exports = router;
