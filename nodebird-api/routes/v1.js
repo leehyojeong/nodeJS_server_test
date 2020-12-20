@@ -1,10 +1,13 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const { verifyToken } = require('./middlewares');
+const { verifyToken, deprecated } = require('./middlewares');
 const { Domain, User, Post, Hashtag } = require('../models');
 
 const router = express.Router();
+
+// v1으로 접근한 모든 요청에 deprecated 응답 전송
+router.use(deprecated);
 
 // 토큰을 발급하는 라우터
 router.post('/token', async (req, res) => {

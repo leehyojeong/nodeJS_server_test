@@ -1,7 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const URL = 'http://localhost:8002/v1';
+// const URL = 'http://localhost:8002/v1';
+const URL = 'http://localhost:8002/v2';
 
 axios.defaults.headers.origin = 'http://localhost:8003'
 
@@ -82,5 +83,9 @@ router.get('/search/:hashtag', async (req,res,next)=>{
 //         return next(error);
 //     }
 // });
+
+router.get('/', (req, res)=>{
+    res.render('main', { key: process.env.CLIENT_SECRET });
+});
 
 module.exports = router;
