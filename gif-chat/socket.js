@@ -1,33 +1,60 @@
 const SocketIO = require('socket.io');
+const axios = require('axios');
 
-module.exports = (server) => {
-    // socket.io를 불러와서 익스프레스 서버와 연결
-    // 두 번째 옵션 객체로 클라이언트와 연결할 수 있는 경로를 넣음
-    const io  = SocketIO(server, { path: '/socket.io' }); // path 옵션
+module.exports = (server, app, sessionMiddleware)=>{
+    const io = SocketIO(server, { path : '/socket.io' });
+    app.set('io', io); // 라우터에서 io 객체를 쓸 수 있게 저장
 
-    io.on('connection', (socket)=>{ // 클라이언트가 접속했을 때 발생
-        // connection 이벤트는 콜백으로 소켓 객체 제공
+    // of는 socket.io에 네임스페이스를 부여하는 메서드 
+    // 같은 네임스페이스끼리만 데이터 전달
+    const room = io.of('/room');
+    const chat = io.of('/chat');
+
+    // 모든 웹 소켓 연결 시마다 실행
+    io.use((socket, next)=>{ // io.use 메서드에 미들웨어 장착 가능
+        sessionMiddleware(socket.request, socket.request.res, next);
+    });
+
+    room.on('connection', (socket)=>{
+        console.log('room 네임스페이스에 접속');
+        socket.on('disconnect', ()=>{
+            console.log('room 네임스페이스 접속 해제');
+        });
+    });
+
+    chat.on('connection', (socket)=>{
+        console.log('chat 네임스페이스에 접속');
+        const req = socket.request;
+        const { headers: { referer }} = req;
+        const roomId = referer
+            .split('/')[referer.split('/').length-1]
+            .replace(/\?.+/,'');
+        socket.join(roomId); // room에 들어가는 메서드
+        socket.to(roomId).emit('join', { // to 메서드로 특정 방에 데이터를 보낼 수 있음
+            user: 'system', 
+            chat: `${req.session.color}님이 입장하셨습니다.`, // 세션 미들웨어와 socket.io를 연결했으므로 웹 소켓에서 세션 사용 가능
+        });
         
-        const req = socket.request; // request 속성으로 요청 객체에 접근
-        // socket.request.res로는 응답 객체에 접근 가능
+        socket.on('disconnect', ()=>{
+            console.log('chat 네임스페이스 접속 해제');
+            socket.leave(roomId); // room에서 나가는 메서드
 
-        const ip = req.headers['x-forwarded-for']||req.connection.remoteAddress;
-        console.log('새로운 클라이언트 접속', ip, socket.id, req.ip); // socket.id로 소켓 고유의 아이디 가져올 수 있음
-        
-        socket.on('disconnect', () => { // 클라이언트가 연결을 끊을 때 
-            console.log('클라이언트 접속 해제', ip, socket.id);
-            clearInterval(socket.interval);
+            const currentRoom = socket.adapter.rooms[roomId]; // 현재 방
+            const userCount = currentRoom ? currentRoom.length : 0; // 현재 방 사람 수
+            if(userCount === 0){ // 0명이면 방 제거 HTTP 요청 전송
+                axios.delete(`http://localhost:8005/room/${roomId}`)
+                    .then(()=>{
+                        console.log('방 제거 요청 성공');
+                    })
+                    .catch((error)=>{
+                        console.error(error);
+                    });
+            }else{ // 0명이 아니면 퇴장 데이터 전송
+                socket.to(roomId).emit('exit', {
+                    user: 'system', 
+                    chat: `${req.session.color}님이 퇴장하셨습니다.`,
+                });
+            }
         });
-        socket.on('error', (error) => {
-            console.error(error);
-        });
-        socket.on('reply', (data) => { // 사용자가 직접 만든 이벤트
-            console.log(data);
-        });
-        socket.interval = setInterval(() => {
-            // 데이터를 클라이언트한테 보냄
-            // 클라이언트가 아래 이벤트를 받으려면 news 이벤트 리스터를 갖고 있어야 함
-            socket.emit('news', 'Hello Socket.IO'); // 이벤트 이름, 데이터
-        }, 3000);
     });
 };

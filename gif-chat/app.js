@@ -4,12 +4,25 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
+const ColorHash = require('color-hash');
 require('dotenv').config();
 
 const webSocket = require('./socket');
 const indexRouter = require('./routes');
+const connect = require('./schemas');
 
 const app = express();
+connect(); // 서버 실행 시 몽고디비에 바로 접속할 수 있도록 서버와 몽구스 연결
+
+const sessionMiddleware = session({
+    resave: false, 
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET, 
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    },
+});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','pug');
@@ -20,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(sessionMiddleware);
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -30,6 +44,14 @@ app.use(session({
     },
 }));
 app.use(flash());
+
+app.use((req, res, next)=>{
+    if(!req.session.color){
+        const colorHash = new ColorHash();
+        req.session.color = colorHash.hex(req.sessionID);
+    }
+    next();
+});
 
 app.use('/', indexRouter);
 
@@ -50,4 +72,4 @@ const server = app.listen(app.get('port'), ()=>{
     console.log(app.get('port'), '번 포트에서 대기 중');
 });
 
-webSocket(server);
+webSocket(server, app, sessionMiddleware);
