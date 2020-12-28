@@ -20,7 +20,6 @@ const sessionMiddleware = session({
     saveUninitialized: false,
     secret: process.env.COOKIE_SECRET, 
     cookie: {
-        path: '/',
         httpOnly: true,
         secure: false,
     },
