@@ -5,40 +5,59 @@ block content
             div.start.container
                 div
                     h1 HELLO
-                    h2 My Name is 
-                    h2#name Hyojung
+                    h2 I'm
+                    h2#name Hyojung Lee
                         span
-                    a.cta(href="#" type="button") Portfolio
-    section#services
-        div.services.container
-            div.service-top
-                h1.section-title Services
-                p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-            div.service-bottom
-                div.service-item
+                    //- a.cta(href="#" type="button") Portfolio
+    section#about
+        div.about.container
+            div.col-left
+                div.about-img-box
+                    img.about-img(src="./images/about.jpg" alt="img")
+            div.col-right
+                h1.section-title <span>A</span>bout
+                h2 이효정 - 李孝晶
+                h2.about-title Hyojung Lee
+                ul
+                    li 1998.11.20 서울
+                    li hyojung120@naver.com
+                    li https://github.com/leehyojeong/PORTFOLIO
+                h2.about-title Education
+                ul
+                    li 2014 ~ 2017 대전 대덕고등학교 재학/졸업
+                    li 2017 ~ 건국대학교 서울캠퍼스 전공 컴퓨터공학부 재학중
+                    li 2018 ~ 건국대학교 서울캠퍼스 부전공 줄기세포재생공학과 재학중
+                //- a.cta(href="#") Download Resume
+    section#skills
+        div.skills.container
+            div.skill-top
+                h1.section-title <span>S</span>kills
+                p 어제보다 발전한 개발자가 되기 위해 노력하는 이효정입니다
+            div.skill-bottom
+                div.skill-item
                     div.icon
                         img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Web Design
-                    p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                div.service-item
+                    h2 Web developer
+                    p JavaScript, NodeJS, pug, express, MySQL, MongoDB
+                div.skill-item
                     div.icon
                         img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Web Design
-                    p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                div.service-item
+                    h2 Amazon Web Service
+                    p EC2, S3, Lambda, DynamoDB, Rekognition
+                div.skill-item
                     div.icon
                         img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Web Design
-                    p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                div.service-item
+                    h2 Python
+                    p Spyder, Jupyter Notebook
+                div.skill-item
                     div.icon
                         img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Web Design
-                    p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                    h2 C/C++, Java
+                    p Visual Studio, Eclipse
     section#projects
         div.projects.container
             div.projects-header
-                h1.section-title Projects
+                h1.section-title <span>P</span>rojects
             div.all-projects
                 div.project-item
                     div.project-info
@@ -68,16 +87,6 @@ block content
                         p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
                     div.project-img
                         img(src="./images/project-04.jpg" alt="img")
-    section#about
-        div.about.container
-            div.col-left
-                div.about-img
-                    img(src="./images/person.jpg" alt="img")
-            div.col-right
-                h1.section-title About
-                h2 Full Stack Web Developer
-                p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                a.cta(href="#") Download Resume
     section#footer
         div.footer.container
             div.brand
