@@ -34,14 +34,6 @@ img {
     width: 100%;
     object-fit: cover;
 }
-p {
-    color: #8E8E8E;
-    font-size: 1.4rem;
-    margin-top: 5px;
-    line-height: 2.5rem;
-    font-weight: 300;
-    letter-spacing: .05rem;
-}
 .section-title {
     color: #F6F2E2;
     font-family: 'Bodoni MT', serif;
@@ -349,54 +341,120 @@ p {
     margin: 0 auto;
     padding: 100px 0;
 }
-#skills .skill-bottom {
+#skills .skill-top {
+    position: relative;
+    width: 450px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#skills .skill-top  .white-circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-image: url(./images/white-circle.svg);
+    top: 0;
+    left: 70px;
+}
+#skills .skill-top #title-box {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
+    width: 230px;
+    height: 230px;
+    background-color: #202020;
+    top: 40px;
+    left: 110px;
 }
-#skills .skill-item {
-    flex-basis: 80%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    padding: 30px;
-    border-radius: 10px;
-    background-image: url(./images/project-01.jpg);
-    background-size: conver;
-    margin: 10px 5%;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-}
-#skills .skill-item::after {
-    content: '';
+#skills .skill-top #sphere-box {
     position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    opacity: .5;
-    z-index: -1;
+    width: 250px;
+    height: 250px;
+    opacity: .3;
+    bottom: 20px;
+    right: 0;
 }
-#skills .skill-bottom .icon {
-    height: 80px;
-    width: 80px;
+#skills .skill-top #title-box .section-title {
+    margin-left: auto;
+    margin-right: auto;
+}
+#skills .skill-top #quote-box-top {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 125px;
+}
+#skills .skill-top #quote-box-bottom {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 95px;
+    left: 180px;
+}
+#skills .skill-top .quotes{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 35px;
+}
+#skills .skill-top .quotes:first-child{
+    margin-right: 10px;
+}
+#skills .skill-top .quotes:last-child{
+    margin-left: 10px;
+}
+#skills .skill-top .quote {
+    font-family: 'Bodoni MT', serif;
+    color: #F6F2E2;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: .4rem;
+}
+#skills .skill-bottom {
+    font-family: 'Bodoni MT', serif;
+    color: #F6F2E2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+#skills .skill-bottom:after {
+    width: 450px;
+    height: 600px;
+    content: '';
+    background-image: url(./images/grid-circle.svg);
+    background-size: cover;
+    opacity: .5;
+    position: absolute;
+}
+#skills .skill-bottom .skills-title {
+    font-weight: 600;
+    font-size: 2.4rem;
+    letter-spacing: .3rem;
+}
+#skills .skill-bottom .line {
+    width: 120px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#skills .skill-bottom ul {
     margin-bottom: 20px;
 }
-#skills .skill-item h2 {
-    font-size: 1.7rem;
-    color: #F6F2E2;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+#skills .skill-bottom li {
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
 }
-#skills .skill-item p {
-    color: #F6F2E2;
-    text-align: left;
-} 
 /* End Skills Section */
 
 /* Projects Section */

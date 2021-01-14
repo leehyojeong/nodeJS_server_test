@@ -45,32 +45,46 @@ block content
     section#skills
         div.skills.container
             div.skill-top
-                h1.section-title Skills
+                div.white-circle
+                div#title-box
+                    h1.section-title Skill
+                div#sphere-box
+                    img.sphere(src="./images/sphere.svg")
+                div#quote-box-top
+                    img.quotes(src="./images/quotes.svg")
+                    p.quote Never underestimate your
+                div#quote-box-bottom    
+                    p.quote own ignorance.
+                    img.quotes(src="./images/quotes_bottom.svg")
             div.skill-bottom
-                div.skill-item
-                    div.icon
-                        img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Web developer
-                    p JavaScript, NodeJS, pug, express, MySQL, MongoDB
-                div.skill-item
-                    div.icon
-                        img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Amazon Web Service
-                    p EC2, S3, Lambda, DynamoDB, Rekognition
-                div.skill-item
-                    div.icon
-                        img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 Python
-                    p Spyder, Jupyter Notebook
-                div.skill-item
-                    div.icon
-                        img(src="https://img.icons8.com/bubbles/50/000000/code.png")
-                    h2 C/C++, Java
-                    p Visual Studio, Eclipse
+                h2.skills-title Programming <br>Languages
+                    hr.line
+                    ul
+                        li CSS
+                        li HTML
+                        li JavaScript
+                        li Java
+                        li Python
+                        li C/C++
+                        li MySQL
+                        li MongoDB
+                h2.skills-title Tools
+                    hr.line
+                    ul
+                        li Adobe Photoshop
+                        li Adobe Illustrator
+                        li Git/GitHub
+                        li VS code
+                        li Visual Studio
+                        li Windows
+                        li Linux
+                        li AWS
+                        li Spyder
+                        li Jupyter Notebook
     section#projects
         div.projects.container
             div.projects-header
-                h1.section-title <span>P</span>rojects
+                h1.section-title Projects
             div.all-projects
                 div.project-item
                     div.project-info
