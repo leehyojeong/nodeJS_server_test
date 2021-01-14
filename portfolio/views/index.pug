@@ -3,36 +3,49 @@ extends layout
 block content
     section#start
             div.start.container
-                div
+                div.blue-circle
                     h1 HELLO
-                    h2 I'm
-                    h2#name Hyojung Lee
-                        span
+                    div#name-box
+                        h2 I'm
+                        h2#name Hyojung Lee
+                            span
+                    hr.line
+                    h2#sub-name 2021 developer's<br> portfolio
                     //- a.cta(href="#" type="button") Portfolio
+                h2#scroll scroll
     section#about
         div.about.container
             div.col-left
+                hr.line#top-line
+                h1.section-title About
                 div.about-img-box
                     img.about-img(src="./images/about.jpg" alt="img")
+                div.about-profile
+                    h2 이효정
+                    h2.about-title Hyojung Lee
+                    h2#birth 1998. 11. 20
+                    hr.line#middle-line
+                    ul
+                        li hyojung120@naver.com
+                        li https://github.com/<br>leehyojeong/PORTFOLIO
+                hr.line#bottom-line
             div.col-right
-                h1.section-title <span>A</span>bout
-                h2 이효정 - 李孝晶
-                h2.about-title Hyojung Lee
-                ul
-                    li 1998.11.20 서울
-                    li hyojung120@naver.com
-                    li https://github.com/leehyojeong/PORTFOLIO
-                h2.about-title Education
-                ul
-                    li 2014 ~ 2017 대전 대덕고등학교 재학/졸업
-                    li 2017 ~ 건국대학교 서울캠퍼스 전공 컴퓨터공학부 재학중
-                    li 2018 ~ 건국대학교 서울캠퍼스 부전공 줄기세포재생공학과 재학중
-                //- a.cta(href="#") Download Resume
+                div.box#first-box
+                    h2.about-title Education
+                    ul
+                        li <span>2014~2017</span> <br>대전 대덕고등학교 졸업
+                        li <span>2017~</span> <br>건국대학교 서울캠퍼스 컴퓨터공학부 전공 재학중
+                        li <span>2018~</span> <br>건국대학교 서울캠퍼스 줄기세포재생공학과 <br>부전공 재학중
+                div.box#second-box
+                    h2.about-title Certification  
+                    ul
+                        li <span>2020 TOEIC </span>
+                        li <span>2020 OPIc </span>
+                        li <span>2020</span> 정보처리기사
     section#skills
         div.skills.container
             div.skill-top
-                h1.section-title <span>S</span>kills
-                p 어제보다 발전한 개발자가 되기 위해 노력하는 이효정입니다
+                h1.section-title Skills
             div.skill-bottom
                 div.skill-item
                     div.icon
