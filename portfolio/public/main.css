@@ -421,12 +421,14 @@ img {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 50px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
+    z-index: 1;
 }
 #skills .skill-bottom:after {
+    margin-bottom: 20px;
     width: 450px;
     height: 600px;
     content: '';
@@ -434,6 +436,7 @@ img {
     background-size: cover;
     opacity: .5;
     position: absolute;
+    z-index: -1;
 }
 #skills .skill-bottom .skills-title {
     font-weight: 600;
@@ -458,14 +461,37 @@ img {
 /* End Skills Section */
 
 /* Projects Section */
+#projects {
+    background-color: #F6F2E2;
+}
 #projects .projects {
     flex-direction: column;
     max-width: 1200px;
     margin: 0 auto;
     padding: 100px 0;
 }
-#projects .projects-header h1 {
-    margin-bottom: 50px;
+#projects .projects .projects-header {
+    position: relative;
+    width: 330px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#projects .projects .projects-header img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 0;
+    top: 0;
+}
+#projects .projects-header .section-title {
+    position: absolute;
+    color: #202020;
+    left: 20px;
+    top: 30px;
+}
+#projects .projects-header span {
+    color: #F6F2E2;
 }
 #projects .all-projects {
     display: flex;
@@ -529,6 +555,18 @@ img {
     transform: scale(1.1);
 }
 /* End Projects Section */
+
+/* Contact Section */
+#contact {
+    background-color: #202020;
+}
+#contact .contact {
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 0;
+}
+/* End Contact Section */
 
 /* Start Keyframes */
 @keyframes text_reveal_box {
