@@ -165,6 +165,9 @@ img {
     position: absolute;
     bottom: 30px;
 }
+#start #scroll:hover {
+    color: red;
+}
 /* End Start Section */
 
 /* About Section */
@@ -296,7 +299,6 @@ img {
 }
 #about .col-right li {
     font-size: 1.4rem;
-    line-height: 2.4rem;
     font-weight: 300;
     letter-spacing: .3rem;
     margin-bottom: 15px;
@@ -413,6 +415,7 @@ img {
     letter-spacing: .4rem;
 }
 #skills .skill-bottom {
+    width: 500px;
     font-family: 'Bodoni MT', serif;
     color: #F6F2E2;
     position: relative;
@@ -422,6 +425,8 @@ img {
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
@@ -566,6 +571,38 @@ img {
     margin: 0 auto;
     padding: 100px 0;
 }
+#contact .contact .brand {
+    width: 300px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#contact .contact .brand h2 {
+    font-family: 'Bodoni MT', serif;
+    color: #F6F2E2;
+    font-weight: 400;
+    font-size: 1.8rem;
+    letter-spacing: .3rem;
+    margin-bottom: 10px;
+}
+#contact .contact hr {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+#contact .contact .copyright {
+    width: 400px;
+    margin-top: 15px;
+}
+#contact .contact .copyright p {
+    font-family: 'Bodoni MT', serif;
+    color: #F6F2E2;
+    font-weight: 400;
+    font-size: 1.2rem;
+    letter-spacing: .2rem;
+    line-height: 1.6rem;
+}
 /* End Contact Section */
 
 /* Start Keyframes */
@@ -589,29 +626,135 @@ img {
 
 /* Media Query for Tablet */
 @media only screen and (min-width:768px) {
-    .cta {
-        font-size: 1.7rem;
-        padding: 10px 40px;
-    }
-    h1.section-title {
-        font-size: 8rem;
-    }
-
     /* Start */
-    #hero h1 {
-        font-size: 4.5rem;
-    }
+
     /* End Start */
 
+    /* About Section */
+    #about .about {
+        flex-direction: row;
+    }
+    #about .col-left {
+        width: 800px;
+        height: 400px;
+        padding-left: 50px;
+    }
+    #about .col-right {
+        padding: 20px;
+    }
+    #about .col-right .about-title {
+        font-size: 2.4rem;
+    }
+    #about .col-right li {
+        font-size: 1.5rem;
+    }
+    #about .col-right li span {
+        font-size: 1.6rem;
+        letter-spacing: .3rem;
+    }
+    /* End About Section */
+
     /* Skills Section */
-    #skills .skill-bottom .skill-item {
-        flex-basis: 45%;
-        margin: 2.5%;
+    #skills .skills {
+        flex-direction: row-reverse;
+    }
+    #skills .skill-top {
+        margin: 0;
+        width: 500px;
+        height: 500px;
+        margin-right: auto;
+    }
+    #skills .skill-bottom {
+        width: 600px;
+        margin-right: 5px;
+    }
+    #skills .skill-bottom:after {
+        margin-bottom: 20px;
+        width: 500px;
+        height: 653px;
+        content: '';
+        background-image: url(./images/grid-circle.svg);
+        background-size: cover;
+        opacity: .5;
+        position: absolute;
+        z-index: -1;
+    }
+    #skills .skill-bottom .skills-title {
+        font-size: 2.6rem;
+    }
+    #skills .skill-bottom .line {
+        width: 130px;
+    }
+    #skills .skill-bottom li {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+    #skills .skill-top  .white-circle {
+        width: 100px;
+        height: 100px;
+        top: 0;
+        left: 40px;
+    }
+    #skills .skill-top #title-box {
+        width: 250px;
+        height: 250px;
+        top: 50px;
+        left: 90px;
+    }
+    #skills .skill-top #sphere-box {
+        width: 360px;
+        height: 360px;
+        bottom: 10px;
+        right: -60px;
+    }
+    #skills .skill-top #quote-box-top {
+        top: 160px;
+        left: -30px;
+    }
+    #skills .skill-top #quote-box-bottom {
+        top: 190px;
+        left: 190px;
+    }
+    #skills .skill-top .quote {
+        font-size: 2rem;
+    }
+    #skills .skill-top .quotes{
+        width: 20px;
+        height: 20px;
+        margin-bottom: 40px;
+    }
+    #skills .skill-top .quotes:first-child{
+        margin-right: 15px;
     }
     /* End Skills Section */
 
+    /* Contact Section */
+    #contact .contact .brand {
+        width: 300px;
+        margin-top: 50px;
+    }
+    #contact .contact .brand h2 {
+        font-size: 2rem;
+        letter-spacing: .4rem;
+        margin-bottom: 20px;
+    }
+    #contact .contact hr {
+        width: 800px;
+        margin-top: 80px;
+    }
+    #contact .contact .copyright {
+        width: 800px;
+    }
+    #contact .contact .copyright p {
+        font-size: 1.3rem;
+        letter-spacing: .3rem;
+        line-height: 1.8rem;
+        margin-top: 10px;
+    }
+    /* End Contact Section */
+
     /* Projects Section */
-    #projects .project-item {
+    /* #projects .project-item {
         flex-direction: row;
     }
     #projects .project-item:nth-child(even) {
@@ -628,31 +771,7 @@ img {
     }
     #projects .all-projects .project-img {
         height: 100%;
-    }
-    /* End Projects Section */
-
-    /* About Section */
-    #about .about {
-        flex-direction: row;
-    }
-    #about .col-left {
-        width: 800px;
-        height: 400px;
-        padding-left: 50px;
-    }
-    /* #about .about .col-left .about-img::after {
-        left: -45px;
-        top: 34px;
-        height: 98%;
-        width: 98%;
     } */
-    #about .col-right {
-        text-align: left;
-        padding: 30px;
-    }
-    #about .col-right h1 {
-        text-align: left;
-    }
-    /* End About Section */
+    /* End Projects Section */
 }
 /* End Media Query for Tablet */
