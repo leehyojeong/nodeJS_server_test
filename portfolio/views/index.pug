@@ -14,7 +14,7 @@ block content
                     //- a.cta(href="#" type="button") Portfolio
                 h2#scroll scroll
     section#about
-        div.about.container
+        div.about.container.fadein
             div.col-left
                 hr.line#top-line
                 h1.section-title About
@@ -98,3 +98,20 @@ block content
             div.copyright
                 p Copyright 2021. Hyojung Lee
                 p All rights reserved.
+    script.
+        const start_circle = document.querySelector(".blue-circle");
+        const start_section = document.querySelector(".start")
+        const fadein = document.querySelector(".fadein");
+        const about_section = document.querySelector("#about");
+
+        let start_height = start_section.offsetHeight;
+        let about_height = about_section.offsetHeight;
+
+        window.addEventListener('scroll', ()=>{
+            let scroll = window.pageYOffset;
+            let about_sectionY = about_section.getBoundingClientRect();
+
+            start_circle.style.opacity = -scroll / (start_height/2) + 1;
+
+            fadein.style.transform = `translateY(${scroll / (about_height + about_sectionY.top) * 50 - 50}px)`;
+        });
